@@ -1,0 +1,67 @@
+# Alec Glavey
+# golfScoresWrite.py golfScoresRead.py
+# 10-05-19
+# Ver 1.2 1.3
+# The Springfork Amateur Golf Club has a tournament every weekend.
+# The club president has asked you to write two programs:
+# 1. A program that will read each player’s name and golf score as
+# keyboard input, and then save these as records in a file named golf.txt.
+# (Each record will have a field for the player’s name
+# and a field for the player’s score.)
+# 2. A program that reads the records from the golf.txt file and displays them.
+
+# A fucntion to get the player's name from the user
+def playerName():
+    nameInput = input('Enter player\'s name: ')
+    # Return the player's name to main
+    return nameInput
+
+def main():
+    # Create golf.txt in write
+    golfRecord = open('golf.txt','w')
+    # Define loop condition for multiple inputs
+    nameLoop = 'y'
+    while nameLoop == 'y' or nameLoop == 'Y':
+        # Assign variable to the output of playerName function
+        nameInput = playerName()
+        # Write the player name to golf.txt
+        golfRecord.write(str(nameInput) + '\n')
+        # Ask for score from user and assign the input to var score
+        score = int(input('Enter score for ' + nameInput + ': '))
+        # Write score into golf.txt
+        golfRecord.write(str(score) + '\n')
+        #Ask if user would like to add more entries
+        nameLoop = input('Would you like to enter another player? Y/n ' )
+
+    # Close the file and print a goodbye message
+    golfRecord.close()
+    print('Scores have been recorded in the ledger.')
+
+main()
+
+###############################################################################
+
+def main():
+    # Open golf.txt for read
+    golfRecord = open('golf.txt', 'r')
+    # First and every other line are names in file, assign to var name
+    name = golfRecord.readline()
+    # Loop runs until end of line in file
+    while name != '':
+        # Assign the second and every other line to score var
+        score = golfRecord.readline()
+        # Remove newlines for formatting
+        name=name.rstrip('\n')
+        score=score.rstrip('\n')
+        # Print player name and their score
+        print(name + ' scored ' + score + ' points')
+        # Move down to next name and resume loop
+        name = golfRecord.readline()
+
+    # Close file after loop is finished
+    golfRecord.close()
+
+    # Print a goodbye message
+    print('Closing File...')
+
+main()

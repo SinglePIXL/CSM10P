@@ -1,0 +1,69 @@
+# Alec
+# randNumGuessingGame.py
+# 9-25-19
+# Ver 2.3
+# A program that generates a random number in the range of 1 through 100
+# and asks the user to guess what the number is. Count the number of guesses.
+# Once the user has guessed the number, congratulate the user and ask if 
+# they want to continue. If yes, generate a new random number and start over.
+# If no, exit the program.
+
+import random
+
+# Generate a random number and return it
+def randNumberGen():
+    randNumber = random.randint(1,101)
+    return randNumber
+
+# Define the rules for the user and ask for a number then return it
+def userNumber( numberQuerry = 'Guess the number in range of 1-100 ' ):
+    userNum = int(input(numberQuerry))
+    return userNum
+
+
+
+def main():
+    randNumber = randNumberGen()
+    userNum = userNumber()
+    # StartStop is meant to either continue or exit the game
+    startStop = 'y'
+    # Accumulator to keep track of the number of guesses
+    guesses = 0
+    while startStop == 'y' or startStop == 'Y':
+        if userNum > randNumber:
+            # Use the function userNumber to print "Too high"
+            # Overridding the functions defined message
+            userNum = userNumber('Too high, try again. ')
+            guesses +=1
+
+        elif userNum < randNumber:
+            # Use the function userNumber to print "Too low"
+            # Overridding the functions defined message
+            userNum = userNumber('Too low, try again. ')
+            guesses +=1
+
+        else:
+            # Print the congratulations, the correct answer, number of guesses
+            # Generate a new random number and reset the number of guesses
+            print('Congratulations! You found the random number.')
+            guesses +=1
+            print('The random number was', randNumber)
+            print('You guessed ', guesses, 'times.')
+            randNumber = randNumberGen()
+            guesses = 0
+
+            # Ask user if they want to continue. If input is y or Y
+            # Restart the loop. If not, exit the game.
+            startStop = input('Would you like to continue? Y/n ')
+            if startStop == 'y' or startStop == 'Y':
+                userNum = userNumber()
+
+            else:
+                print('Exiting...')
+                exit()
+
+
+
+
+
+main()
