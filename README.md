@@ -1,2 +1,2 @@
 # CSM10P
-Files used for Python Course
+Files used for Python course.
